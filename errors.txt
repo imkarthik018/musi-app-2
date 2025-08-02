@@ -1,0 +1,75 @@
+main.js: DOMContentLoaded fired.
+spotifyAuth.js:117 spotifyAuth.js: Access token is valid.
+spotifyAuth.js:178 spotifyAuth.js: isAuthenticated check. Token: Exists
+main.js:30 main.js: User is authenticated.
+main.js:31 preAuthContent classList BEFORE hiding: h-full flex items-center justify-center p-8
+main.js:33 preAuthContent classList AFTER hiding: h-full flex items-center justify-center p-8 hidden
+main.js:34 authenticatedContent classList BEFORE showing: hidden
+main.js:36 authenticatedContent classList AFTER showing: 
+?error=no_code_or_verifier:296 Spotify SDK is ready (global callback).
+main.js:16 Spotify SDK is ready (main.js listener).
+spotifyAuth.js:117 spotifyAuth.js: Access token is valid.
+main.js:72 Initializing Spotify Player...
+main.js:78 Spotify Player instance created: t
+main.js:86 Adding Spotify Player listeners...
+main.js:118 Spotify Player listeners added.
+main.js:82 Spotify Player connect() called.
+main.js:261 Loading dynamic content...
+spotifyAuth.js:117 spotifyAuth.js: Access token is valid.
+index.js:3 [Violation] Permissions policy violation: unload is not allowed in this document.
+(anonymous) @ index.js:3Understand this error
+index.js:3 It is recommended that a robustness level be specified. Not specifying the robustness level could result in unexpected behavior.
+t.requestMediaKeySystemAccess @ index.js:3Understand this warning
+:5500/favicon.ico:1  Failed to load resource: the server responded with a status of 404 (File not found)Understand this error
+main.js:281 Dynamic content loaded successfully
+main.js:88 Player is ready with Device ID ce7e6642d4d6bca182ecfdae0e75fb367d7f863b
+spotifyAuth.js:117 spotifyAuth.js: Access token is valid.
+main.js:98 Player state changed: Object
+main.js:122 Updating Now Playing UI with state: Object
+main.js:151 Current state.paused: false
+main.js:157 Adding "playing" class to playPauseWrapper.
+main.js:98 Player state changed: Object
+main.js:122 Updating Now Playing UI with state: Object
+main.js:151 Current state.paused: false
+main.js:157 Adding "playing" class to playPauseWrapper.
+main.js:98 Player state changed: Object
+main.js:122 Updating Now Playing UI with state: Object
+main.js:151 Current state.paused: false
+main.js:157 Adding "playing" class to playPauseWrapper.
+main.js:98 Player state changed: Object
+main.js:122 Updating Now Playing UI with state: Object
+main.js:151 Current state.paused: false
+main.js:157 Adding "playing" class to playPauseWrapper.
+main.js:98 Player state changed: {timestamp: 1754152110704, context: {…}, position: 19462, duration: 132884, paused: false, …}
+main.js:122 Updating Now Playing UI with state: {timestamp: 1754152110704, context: {…}, position: 19462, duration: 132884, paused: false, …}
+main.js:151 Current state.paused: false
+main.js:157 Adding "playing" class to playPauseWrapper.
+main.js:98 Player state changed: {timestamp: 1754152110704, context: {…}, position: 19462, duration: 132884, paused: false, …}
+main.js:122 Updating Now Playing UI with state: {timestamp: 1754152110704, context: {…}, position: 19462, duration: 132884, paused: false, …}
+main.js:151 Current state.paused: false
+main.js:157 Adding "playing" class to playPauseWrapper.
+main.js:98 Player state changed: {timestamp: 1754152110704, context: {…}, position: 19462, duration: 132884, paused: false, …}
+main.js:122 Updating Now Playing UI with state: {timestamp: 1754152110704, context: {…}, position: 19462, duration: 132884, paused: false, …}
+main.js:151 Current state.paused: false
+main.js:157 Adding "playing" class to playPauseWrapper.
+favicon.ico:1  GET http://127.0.0.1:5500/favicon.ico 404 (File not found)Understand this error
+main.js:98 Player state changed: {timestamp: 1754152111083, context: {…}, position: 19462, duration: 132884, paused: false, …}
+main.js:122 Updating Now Playing UI with state: {timestamp: 1754152111083, context: {…}, position: 19462, duration: 132884, paused: false, …}
+main.js:151 Current state.paused: false
+main.js:157 Adding "playing" class to playPauseWrapper.
+main.js:98 Player state changed: {timestamp: 1754152112831, context: {…}, position: 19462, duration: 132884, paused: false, …}
+main.js:122 Updating Now Playing UI with state: {timestamp: 1754152112831, context: {…}, position: 19462, duration: 132884, paused: false, …}
+main.js:151 Current state.paused: false
+main.js:157 Adding "playing" class to playPauseWrapper.
+main.js:98 Player state changed: {timestamp: 1754152113123, context: {…}, position: 19465, duration: 132884, paused: false, …}
+main.js:122 Updating Now Playing UI with state: {timestamp: 1754152113123, context: {…}, position: 19465, duration: 132884, paused: false, …}
+main.js:151 Current state.paused: false
+main.js:157 Adding "playing" class to playPauseWrapper.
+main.js:98 Player state changed: {timestamp: 1754152113939, context: {…}, position: 20509, duration: 132884, paused: false, …}
+main.js:122 Updating Now Playing UI with state: {timestamp: 1754152113939, context: {…}, position: 20509, duration: 132884, paused: false, …}
+main.js:151 Current state.paused: false
+main.js:157 Adding "playing" class to playPauseWrapper.
+main.js:98 Player state changed: {timestamp: 1754152114829, context: {…}, position: 21302, duration: 132884, paused: false, …}
+main.js:122 Updating Now Playing UI with state: {timestamp: 1754152114829, context: {…}, position: 21302, duration: 132884, paused: false, …}
+main.js:151 Current state.paused: false
+main.js:157 Adding "playing" class to playPauseWrapper.
