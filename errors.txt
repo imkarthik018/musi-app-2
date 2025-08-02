@@ -21,8 +21,11 @@ index.js:3 [Violation] Permissions policy violation: unload is not allowed in th
 index.js:3 It is recommended that a robustness level be specified. Not specifying the robustness level could result in unexpected behavior.
 t.requestMediaKeySystemAccess @ index.js:3Understand this warning
 :5500/favicon.ico:1  Failed to load resource: the server responded with a status of 404 (File not found)Understand this error
-main.js:281 Dynamic content loaded successfully
-main.js:88 Player is ready with Device ID ce7e6642d4d6bca182ecfdae0e75fb367d7f863b
+spotifyAuth.js:117 spotifyAuth.js: Access token is valid.
+carousel.js:5 Carousel container with ID 'jump-back-in-carousel-container' not found.
+createCarousel @ carousel.js:5Understand this error
+main.js:297 Dynamic content loaded successfully
+main.js:88 Player is ready with Device ID fadafd8eb715ceaacf05bb5d82f1ee64a4846a3e
 spotifyAuth.js:117 spotifyAuth.js: Access token is valid.
 main.js:98 Player state changed: Object
 main.js:122 Updating Now Playing UI with state: Object
@@ -35,41 +38,3 @@ main.js:157 Adding "playing" class to playPauseWrapper.
 main.js:98 Player state changed: Object
 main.js:122 Updating Now Playing UI with state: Object
 main.js:151 Current state.paused: false
-main.js:157 Adding "playing" class to playPauseWrapper.
-main.js:98 Player state changed: Object
-main.js:122 Updating Now Playing UI with state: Object
-main.js:151 Current state.paused: false
-main.js:157 Adding "playing" class to playPauseWrapper.
-main.js:98 Player state changed: {timestamp: 1754152110704, context: {…}, position: 19462, duration: 132884, paused: false, …}
-main.js:122 Updating Now Playing UI with state: {timestamp: 1754152110704, context: {…}, position: 19462, duration: 132884, paused: false, …}
-main.js:151 Current state.paused: false
-main.js:157 Adding "playing" class to playPauseWrapper.
-main.js:98 Player state changed: {timestamp: 1754152110704, context: {…}, position: 19462, duration: 132884, paused: false, …}
-main.js:122 Updating Now Playing UI with state: {timestamp: 1754152110704, context: {…}, position: 19462, duration: 132884, paused: false, …}
-main.js:151 Current state.paused: false
-main.js:157 Adding "playing" class to playPauseWrapper.
-main.js:98 Player state changed: {timestamp: 1754152110704, context: {…}, position: 19462, duration: 132884, paused: false, …}
-main.js:122 Updating Now Playing UI with state: {timestamp: 1754152110704, context: {…}, position: 19462, duration: 132884, paused: false, …}
-main.js:151 Current state.paused: false
-main.js:157 Adding "playing" class to playPauseWrapper.
-favicon.ico:1  GET http://127.0.0.1:5500/favicon.ico 404 (File not found)Understand this error
-main.js:98 Player state changed: {timestamp: 1754152111083, context: {…}, position: 19462, duration: 132884, paused: false, …}
-main.js:122 Updating Now Playing UI with state: {timestamp: 1754152111083, context: {…}, position: 19462, duration: 132884, paused: false, …}
-main.js:151 Current state.paused: false
-main.js:157 Adding "playing" class to playPauseWrapper.
-main.js:98 Player state changed: {timestamp: 1754152112831, context: {…}, position: 19462, duration: 132884, paused: false, …}
-main.js:122 Updating Now Playing UI with state: {timestamp: 1754152112831, context: {…}, position: 19462, duration: 132884, paused: false, …}
-main.js:151 Current state.paused: false
-main.js:157 Adding "playing" class to playPauseWrapper.
-main.js:98 Player state changed: {timestamp: 1754152113123, context: {…}, position: 19465, duration: 132884, paused: false, …}
-main.js:122 Updating Now Playing UI with state: {timestamp: 1754152113123, context: {…}, position: 19465, duration: 132884, paused: false, …}
-main.js:151 Current state.paused: false
-main.js:157 Adding "playing" class to playPauseWrapper.
-main.js:98 Player state changed: {timestamp: 1754152113939, context: {…}, position: 20509, duration: 132884, paused: false, …}
-main.js:122 Updating Now Playing UI with state: {timestamp: 1754152113939, context: {…}, position: 20509, duration: 132884, paused: false, …}
-main.js:151 Current state.paused: false
-main.js:157 Adding "playing" class to playPauseWrapper.
-main.js:98 Player state changed: {timestamp: 1754152114829, context: {…}, position: 21302, duration: 132884, paused: false, …}
-main.js:122 Updating Now Playing UI with state: {timestamp: 1754152114829, context: {…}, position: 21302, duration: 132884, paused: false, …}
-main.js:151 Current state.paused: false
-main.js:157 Adding "playing" class to playPauseWrapper.

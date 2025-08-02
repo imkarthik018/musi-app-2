@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         authenticatedContent.classList.remove('hidden');
         console.log('authenticatedContent classList AFTER showing:', authenticatedContent.classList.value);
         initializeApp();
+
     } else {
         console.log('main.js: User is not authenticated.');
         preAuthContent.classList.remove('hidden');
@@ -277,6 +278,22 @@ async function loadDynamicContent() {
         if (topTracks && topTracks.items) {
             createHeroGrid('hero-grid-container', topTracks.items);
         }
+
+        // Load recently played tracks for "Jump Back In" carousel
+        const recentlyPlayed = await spotifyApi.getRecentlyPlayed(6);
+        if (recentlyPlayed && recentlyPlayed.items) {
+            // The recently played items are 'play history objects', which contain a 'track' object.
+            // We need to map them to the format expected by createCarousel.
+            const carouselItems = recentlyPlayed.items.map(item => ({
+                id: item.track.id,
+                name: item.track.name,
+                artists: item.track.artists,
+                images: item.track.album.images,
+                uri: item.track.uri,
+                type: item.track.type
+            }));
+            createCarousel('jump-back-in-carousel-container', 'Jump Back In', carouselItems);
+        }
         
         console.log('Dynamic content loaded successfully');
     } catch (error) {
@@ -293,9 +310,3 @@ function formatTime(ms) {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
 
-const getGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return 'Good Morning';
-    if (hour < 18) return 'Good Afternoon';
-    return 'Good Evening';
-};
