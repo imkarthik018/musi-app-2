@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Playlist.Studio‑style Custom Cursor Demo</title>
+  <meta name="viewport" content="width=device-width,initial‑scale=1" />
+  <style>
+    /* hide native
+    ***********************************/
+    * {
+      cursor: none;
+    }
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #fdfcfa;
+      font-family: sans-serif;
+      overflow: hidden;
+    }
+
+    /* core cursor wrapper */
+    .cursor {
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      width: 48px;
+      height: 48px;
+      border: 2px solid rgba(17,17,17,0.5);
+      border-radius: 50%;
+      box-sizing: border-box;
+      transform: translate3d(0,0,0) scale(1);
+      transition: width 120ms ease-out,
+                  height 120ms ease-out,
+                  border-width 120ms ease-out,
+                  transform 200ms cubic-bezier(0.23,1,0.32,1);
+      z-index: 9999;
+    }
+    .cursor__dot {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 8px; height: 8px;
+      background: #111;
+      border-radius: 50%;
+      transform: translate(-50%,−50%) scale(0);
+      opacity: 0;
+      transition: opacity 120ms ease-in-out, transform 200ms ease-in-out;
+    }
+
+    .cursor.hover-img {
+      width: 32px;
+      height: 32px;
+      border-width: 3px;
+      transform: translate3d(0,0,0) scale(1);
+    }
+    .cursor.hover-img .cursor__dot {
+      opacity: 1;
+      transform: translate(−50%,−50%) scale(1);
+    }
+
+    .cursor.play-icon .cursor__dot {
+      opacity: 0;
+    }
+    .cursor.play-icon {
+      width: 48px;
+      height: 48px;
+      border-width: 0;
+      transform: translate3d(0,0,0) scale(1);
+      background: transparent;
+    }
+    .cursor.play-icon svg {
+      position: absolute;
+      width: 16px; height: 16px;
+      top: 50%; left: 50%;
+      transform: translate(−50%,−50%) rotate(90deg) scale(0.2);
+      fill: rgba(17,17,17,0.9);
+      transition: transform 120ms ease, opacity 120ms ease;
+      opacity: 0;
+    }
+    .cursor.play-icon svg.visible {
+      opacity: 1;
+      transform: translate(−50%,−50%) rotate(90deg) scale(1);
+    }
+
+    .cursor.hover-link {
+      border-radius: 4px;
+    }
+    .cursor.hover-link .cursor__dot {
+      opacity: 0;
+    }
+
+    .cursor.click-effect {
+      animation: clickShrink 160ms forwards;
+    }
+    @keyframes clickShrink {
+      0% { transform: translate3d(0,0,0) scale(1); }
+      50% { transform: translate3d(0,0,0) scale(0.25); }
+      100% { transform: translate3d(0,0,0) scale(1); }
+    }
+
+    /* demo album covers grid */
+    .covers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
+      gap: 16px;
+      padding: 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .cover {
+      background-size: cover;
+      width: 120px; height: 120px;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: none;
+    }
+
+    /* demo links */
+    .demo-links {
+      position: fixed;
+      bottom: 20px;
+      width: 100%; text-align: center;
+      font-size: 16px;
+      color: #111;
+    }
+    .demo-links a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #111;
+      padding: 4px 8px;
+      cursor: none;
+      display: inline-block;
+      border: 1px solid transparent;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="cursor" class="cursor">
+    <div class="cursor__dot"></div>
+    <svg viewBox="0 0 24 24" class="">
+      <polygon points="8,5 19,12 8,19"></polygon>
+    </svg>
+  </div>
+
+  <div class="covers">
+    <div class="cover" style="background-image:url('https://picsum.photos/id/100/300')"></div>
+    <div class="cover" style="background-image:url('https://picsum.photos/id/101/300')"></div>
+    <div class="cover" style="background-image:url('https://picsum.photos/id/102/300')"></div>
+    <div class="cover" style="background-image:url('https://picsum.photos/id/103/300')"></div>
+  </div>
+
+  <div class="demo-links">
+    <a href="#">Home</a>
+    <a href="#">Albums</a>
+    <a href="#">Contact</a>
+  </div>
+
+  <script>
+    (function(){
+      const cursor = document.getElementById('cursor');
+      const dot = cursor.querySelector('.cursor__dot');
+      const svg = cursor.querySelector('svg');
+
+      let mouseX = window.innerWidth/2;
+      let mouseY = window.innerHeight/2;
+      let ringX = mouseX;
+      let ringY = mouseY;
+
+      const ease = 0.15;
+
+      window.addEventListener('mousemove', e => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursor.style.top = (mouseY - cursor.offsetHeight/2) + 'px';
+        cursor.style.left = (mouseX - cursor.offsetWidth/2) + 'px';
+      });
+
+      const lerp = (a, b, t) => a + (b - a) * t;
+
+      function follow() {
+        ringX = lerp(ringX, mouseX, ease);
+        ringY = lerp(ringY, mouseY, ease);
+        cursor.style.transform = `translate3d(calc(${ringX - cursor.offsetLeft}px),calc(${ringY - cursor.offsetTop}px),0) scale(1)`;
+        requestAnimationFrame(follow);
+      }
+      cancelAnimationFrame();
+      follow();
+
+      document.addEventListener('mousedown', () => {
+        cursor.classList.add('click-effect');
+        setTimeout(() => cursor.classList.remove('click-effect'), 200);
+      });
+
+      // handle hover states
+      const imgs = document.querySelectorAll('.cover');
+      imgs.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursor.classList.add('hover-img');
+          cursor.classList.add('play-icon');
+          svg.classList.add('visible');
+        });
+        el.addEventListener('mouseleave', () => {
+          cursor.classList.remove('hover-img');
+          cursor.classList.remove('play-icon');
+          svg.classList.remove('visible');
+        });
+      });
+
+      const links = document.querySelectorAll('.demo-links a');
+      links.forEach(el => {
+        el.addEventListener('mouseenter', (e) => {
+          const rect = el.getBoundingClientRect();
+          const w = rect.width + 16;
+          const h = rect.height + 8;
+          cursor.style.width = w + 'px';
+          cursor.style.height = h + 'px';
+          cursor.classList.add('hover-link');
+        });
+        el.addEventListener('mouseleave', () => {
+          cursor.style.width = '';
+          cursor.style.height = '';
+          cursor.classList.remove('hover-link');
+        });
+      });
+
+      window.addEventListener('keydown', e => {
+        if(e.key === 'Escape') {
+          cursor.classList.add('hide');
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>

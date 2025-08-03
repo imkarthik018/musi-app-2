@@ -25,7 +25,7 @@ const createCarousel = (containerId, title, items) => {
             <div class="flex-none w-40 group">
                 <div class="relative mb-3 rounded-xl overflow-hidden aspect-square shadow-lg">
                     <img src="${imageUrl}" alt="${itemName}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    <button class="absolute bottom-2 right-2 w-10 h-10 bg-musi-accent text-black rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 play-button" data-uri="${item.uri}" data-type="${itemType}">
+                    <button class="absolute bottom-2 right-2 w-10 h-10 bg-musi-accent text-black rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 play-button cursor-target" data-uri="${item.uri}" data-type="${itemType}">
                         <i class="fas fa-play text-sm"></i>
                     </button>
                 </div>

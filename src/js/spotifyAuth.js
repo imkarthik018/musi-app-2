@@ -52,15 +52,12 @@ const spotifyAuth = {
     },
 
     handleCallback: async () => {
-        console.log('spotifyAuth.js: handleCallback called.');
         const urlParams = new URLSearchParams(window.location.search);
         const code = urlParams.get('code');
         const codeVerifier = localStorage.getItem('code_verifier');
-        console.log('spotifyAuth.js: Authorization code received:', code);
 
         if (code && codeVerifier) {
             try {
-                console.log('spotifyAuth.js: Attempting to exchange code for tokens...');
                 const tokenResponse = await fetch('https://accounts.spotify.com/api/token', {
                     method: 'POST',
                     headers: {
@@ -81,10 +78,8 @@ const spotifyAuth = {
                 }
 
                 const data = await tokenResponse.json();
-                console.log('spotifyAuth.js: Tokens received:', data);
                 spotifyAuth.saveTokens(data.access_token, data.refresh_token, data.expires_in);
                 localStorage.removeItem('code_verifier'); // Clean up code_verifier
-                console.log('spotifyAuth.js: Tokens saved. Redirecting to home page...');
                 window.location.href = '/'; // Redirect to home page
             } catch (error) {
                 console.error('spotifyAuth.js: Error exchanging code for tokens:', error);
@@ -101,7 +96,6 @@ const spotifyAuth = {
         localStorage.setItem('spotify_access_token', accessToken);
         localStorage.setItem('spotify_refresh_token', refreshToken);
         localStorage.setItem('spotify_token_expires_at', Date.now() + expiresIn * 1000);
-        console.log('spotifyAuth.js: Tokens successfully stored in localStorage.');
     },
 
     getAccessToken: () => {
@@ -109,16 +103,13 @@ const spotifyAuth = {
         const expiresAt = localStorage.getItem('spotify_token_expires_at');
 
         if (!accessToken || !expiresAt) {
-            console.log('spotifyAuth.js: No access token or expiry found in localStorage.');
             return null;
         }
 
         if (Date.now() < expiresAt) {
-            console.log('spotifyAuth.js: Access token is valid.');
             return accessToken;
         }
 
-        console.log('spotifyAuth.js: Access token expired. Attempting to refresh...');
         return spotifyAuth.refreshAccessToken();
     },
 
@@ -127,10 +118,8 @@ const spotifyAuth = {
     },
 
     refreshAccessToken: async () => {
-        console.log('spotifyAuth.js: refreshAccessToken called.');
         const refreshToken = spotifyAuth.getRefreshToken();
         if (!refreshToken) {
-            console.error('spotifyAuth.js: No refresh token available.');
             spotifyAuth.clearTokens();
             return null;
         }
@@ -154,7 +143,6 @@ const spotifyAuth = {
             }
 
             const data = await refreshResponse.json();
-            console.log('spotifyAuth.js: Refreshed tokens received:', data);
             spotifyAuth.saveTokens(data.access_token, data.refresh_token || refreshToken, data.expires_in);
             return data.access_token;
         } catch (error) {
@@ -168,14 +156,12 @@ const spotifyAuth = {
         localStorage.removeItem('spotify_access_token');
         localStorage.removeItem('spotify_refresh_token');
         localStorage.removeItem('spotify_token_expires_at');
-        console.log('spotifyAuth.js: All tokens cleared from localStorage.');
         // Optionally, redirect to login page
         window.location.href = '/';
     },
 
     isAuthenticated: () => {
         const token = spotifyAuth.getAccessToken();
-        console.log('spotifyAuth.js: isAuthenticated check. Token:', token ? 'Exists' : 'Does not exist');
         return !!token;
     }
 };

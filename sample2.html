@@ -1,0 +1,186 @@
+<!-- 🎵 Music Library Carousel (with Playlist.Studio-style Cursor + Hover FX) -->
+<h1 class="about-title tracking-widest uppercase text-[clamp(1.5rem,5vw,3rem)] text-center font-serif mt-12 mb-16 text-neutral-800">YOUR LIBRARY</h1>
+
+<div class="carousel-container relative">
+	<button class="nav-arrow left">‹</button>
+	<div class="carousel-track">
+	</div>
+	<button class="nav-arrow right">›</button>
+</div>
+
+<div class="member-info text-center mt-10">
+	<h2 class="member-name text-2xl font-bold font-serif transition-opacity duration-500">Loading...</h2>
+	<p class="member-role text-sm text-gray-600 transition-opacity duration-500"></p>
+</div>
+
+<div class="dots flex justify-center mt-6 space-x-2">
+</div>
+
+<!-- Custom Cursor (Framer Motion-inspired) -->
+<div id="custom-cursor" class="pointer-events-none fixed top-0 left-0 z-50 w-12 h-12 rounded-full border-2 border-neutral-800 opacity-70 transition-transform duration-150 ease-out transform -translate-x-1/2 -translate-y-1/2"></div>
+
+<script type="module">
+import { spotifyApi } from './src/js/spotifyApi.js';
+
+let albums = []; // This will be populated by Spotify data
+let cards = [];
+let dots = [];
+const albumName = document.querySelector(".member-name");
+const albumDetails = document.querySelector(".member-role");
+const leftArrow = document.querySelector(".nav-arrow.left");
+const rightArrow = document.querySelector(".nav-arrow.right");
+const carouselTrack = document.querySelector(".carousel-track");
+const dotsContainer = document.querySelector(".dots");
+
+let currentIndex = 0;
+let isAnimating = false;
+
+function updateCarousel(newIndex) {
+	if (isAnimating || albums.length === 0) return;
+	isAnimating = true;
+	currentIndex = (newIndex + albums.length) % albums.length;
+
+	cards.forEach((card, i) => {
+		const offset = (i - currentIndex + albums.length) % albums.length;
+		card.classList.remove("center", "left-1", "left-2", "right-1", "right-2", "hidden");
+
+		if (offset === 0) card.classList.add("center");
+		else if (offset === 1) card.classList.add("right-1");
+		else if (offset === 2) card.classList.add("right-2");
+		else if (offset === albums.length - 1) card.classList.add("left-1");
+		else if (offset === albums.length - 2) card.classList.add("left-2");
+		else card.classList.add("hidden");
+	});
+
+	dots.forEach((dot, i) => {
+		dot.classList.toggle("active", i === currentIndex);
+	});
+
+	albumName.style.opacity = "0";
+	albumDetails.style.opacity = "0";
+
+	setTimeout(() => {
+		albumName.textContent = albums[currentIndex].name;
+		albumDetails.textContent = albums[currentIndex].details;
+		albumName.style.opacity = "1";
+		albumDetails.style.opacity = "1";
+	}, 300);
+
+	setTimeout(() => {
+		isAnimating = false;
+	}, 800);
+}
+
+function transitionToPlayer(playlistId) {
+	document.body.classList.add("player-transition");
+	setTimeout(() => {
+		window.location.href = `/player?playlistId=${playlistId}`;
+	}, 500);
+}
+
+async function initCarouselWithSpotifyData() {
+    try {
+        const userPlaylists = await spotifyApi.getUserPlaylists(20); // Fetch up to 20 playlists
+        if (userPlaylists && userPlaylists.items && userPlaylists.items.length > 0) {
+            albums = userPlaylists.items.map(playlist => ({
+                id: playlist.id,
+                name: playlist.name,
+                details: `${playlist.tracks.total} Tracks`, // You can fetch duration later if needed
+                imageUrl: playlist.images.length > 0 ? playlist.images[0].url : 'https://via.placeholder.com/150' // Placeholder if no image
+            }));
+
+            // Clear existing hardcoded cards and dots
+            carouselTrack.innerHTML = '';
+            dotsContainer.innerHTML = '';
+
+            // Dynamically create cards and dots
+            albums.forEach((album, i) => {
+                const cardDiv = document.createElement('div');
+                cardDiv.classList.add('card');
+                cardDiv.dataset.index = i;
+                cardDiv.innerHTML = `<img src="${album.imageUrl}" alt="${album.name} Album">`;
+                carouselTrack.appendChild(cardDiv);
+
+                const dotDiv = document.createElement('div');
+                dotDiv.classList.add('dot');
+                dotDiv.dataset.index = i;
+                dotsContainer.appendChild(dotDiv);
+            });
+
+            // Re-select cards and dots after dynamic creation
+            cards = document.querySelectorAll(".card");
+            dots = document.querySelectorAll(".dot");
+
+            // Attach event listeners to newly created cards and dots
+            cards.forEach((card, i) => {
+                card.addEventListener("click", () => {
+                    transitionToPlayer(albums[i].id);
+                });
+            });
+
+            dots.forEach((dot, i) => dot.addEventListener("click", () => updateCarousel(i)));
+
+            // Initialize carousel
+            updateCarousel(0);
+
+            // Attach hover FX for cards
+            cards.forEach(card => {
+                card.addEventListener("mouseenter", () => {
+                    cursor.classList.add("hover-scale");
+                });
+                card.addEventListener("mouseleave", () => {
+                    cursor.classList.remove("hover-scale");
+                });
+            });
+
+        } else {
+            console.log("No Spotify playlists found or error fetching.");
+            albumName.textContent = "No Playlists Found";
+            albumDetails.textContent = "Please check your Spotify library.";
+        }
+    } catch (error) {
+        console.error("Error initializing carousel with Spotify data:", error);
+        albumName.textContent = "Error Loading Playlists";
+        albumDetails.textContent = "Please try again later.";
+    }
+}
+
+// Initial call to load Spotify data
+initCarouselWithSpotifyData();
+
+// Custom Cursor Implementation
+const cursor = document.getElementById("custom-cursor");
+let mouseX = 0, mouseY = 0;
+
+window.addEventListener("mousemove", e => {
+	mouseX = e.clientX;
+	mouseY = e.clientY;
+});
+
+function renderCursor() {
+	cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+	requestAnimationFrame(renderCursor);
+}
+requestAnimationFrame(renderCursor);
+
+
+<style>
+body.player-transition {
+	transition: all 0.6s ease-in-out;
+	opacity: 0;
+	transform: scale(0.95);
+	pointer-events: none;
+}
+
+.card:hover img {
+	transform: scale(1.1);
+	transition: transform 0.15s ease-out;
+}
+
+#custom-cursor.hover-scale {
+	transform: scale(0.7) translate3d(var(--x), var(--y), 0);
+	border-width: 3px;
+	background-color: rgba(255, 255, 255, 0.15);
+	transition: all 0.2s ease-out;
+}
+</style>

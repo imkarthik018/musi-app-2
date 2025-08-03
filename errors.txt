@@ -1,40 +1,44 @@
-main.js: DOMContentLoaded fired.
-spotifyAuth.js:117 spotifyAuth.js: Access token is valid.
-spotifyAuth.js:178 spotifyAuth.js: isAuthenticated check. Token: Exists
-main.js:30 main.js: User is authenticated.
-main.js:31 preAuthContent classList BEFORE hiding: h-full flex items-center justify-center p-8
-main.js:33 preAuthContent classList AFTER hiding: h-full flex items-center justify-center p-8 hidden
-main.js:34 authenticatedContent classList BEFORE showing: hidden
-main.js:36 authenticatedContent classList AFTER showing: 
-?error=no_code_or_verifier:296 Spotify SDK is ready (global callback).
-main.js:16 Spotify SDK is ready (main.js listener).
-spotifyAuth.js:117 spotifyAuth.js: Access token is valid.
-main.js:72 Initializing Spotify Player...
-main.js:78 Spotify Player instance created: t
-main.js:86 Adding Spotify Player listeners...
-main.js:118 Spotify Player listeners added.
-main.js:82 Spotify Player connect() called.
-main.js:261 Loading dynamic content...
-spotifyAuth.js:117 spotifyAuth.js: Access token is valid.
+passion.jpg:1  Failed to load resource: the server responded with a status of 404 (File not found)Understand this error
+download%20(3).jpg:1  Failed to load resource: the server responded with a status of 404 (File not found)Understand this error
+overthink.jpg:1  Failed to load resource: the server responded with a status of 404 (File not found)Understand this error
+spotifyAuth.js:185 spotifyAuth.js: isAuthenticated() called.
+spotifyAuth.js:112 spotifyAuth.js: getAccessToken() called.
+spotifyAuth.js:122 spotifyAuth.js: Access token is valid. Returning access token.
+spotifyAuth.js:187 spotifyAuth.js: isAuthenticated check. Token: Exists
+(index):509 Spotify SDK is ready (global callback).
+spotifyAuth.js:112 spotifyAuth.js: getAccessToken() called.
+spotifyAuth.js:122 spotifyAuth.js: Access token is valid. Returning access token.
+spotifyAuth.js:112 spotifyAuth.js: getAccessToken() called.
+spotifyAuth.js:122 spotifyAuth.js: Access token is valid. Returning access token.
 index.js:3 [Violation] Permissions policy violation: unload is not allowed in this document.
 (anonymous) @ index.js:3Understand this error
 index.js:3 It is recommended that a robustness level be specified. Not specifying the robustness level could result in unexpected behavior.
 t.requestMediaKeySystemAccess @ index.js:3Understand this warning
-:5500/favicon.ico:1  Failed to load resource: the server responded with a status of 404 (File not found)Understand this error
-spotifyAuth.js:117 spotifyAuth.js: Access token is valid.
-carousel.js:5 Carousel container with ID 'jump-back-in-carousel-container' not found.
-createCarousel @ carousel.js:5Understand this error
-main.js:297 Dynamic content loaded successfully
-main.js:88 Player is ready with Device ID fadafd8eb715ceaacf05bb5d82f1ee64a4846a3e
-spotifyAuth.js:117 spotifyAuth.js: Access token is valid.
-main.js:98 Player state changed: Object
-main.js:122 Updating Now Playing UI with state: Object
-main.js:151 Current state.paused: false
-main.js:157 Adding "playing" class to playPauseWrapper.
-main.js:98 Player state changed: Object
-main.js:122 Updating Now Playing UI with state: Object
-main.js:151 Current state.paused: false
-main.js:157 Adding "playing" class to playPauseWrapper.
-main.js:98 Player state changed: Object
-main.js:122 Updating Now Playing UI with state: Object
-main.js:151 Current state.paused: false
+api.spotify.com/v1/browse/featured-playlists?limit=6&offset=0:1  Failed to load resource: the server responded with a status of 404 ()Understand this error
+spotifyApi.js:64 Error fetching from Spotify API: /browse/featured-playlists?limit=6&offset=0 Error: Spotify API error: 404
+    at Object._fetch (spotifyApi.js:53:23)
+    at async loadDynamicContent (main.js:267:35)
+    at async initializeApp (main.js:349:5)
+_fetch @ spotifyApi.js:64Understand this error
+spotifyAuth.js:112 spotifyAuth.js: getAccessToken() called.
+spotifyAuth.js:122 spotifyAuth.js: Access token is valid. Returning access token.
+spotifyAuth.js:112 spotifyAuth.js: getAccessToken() called.
+spotifyAuth.js:122 spotifyAuth.js: Access token is valid. Returning access token.
+spotifyAuth.js:112 spotifyAuth.js: getAccessToken() called.
+spotifyAuth.js:122 spotifyAuth.js: Access token is valid. Returning access token.
+spotifyAuth.js:112 spotifyAuth.js: getAccessToken() called.
+spotifyAuth.js:122 spotifyAuth.js: Access token is valid. Returning access token.
+spotifyAuth.js:112 spotifyAuth.js: getAccessToken() called.
+spotifyAuth.js:122 spotifyAuth.js: Access token is valid. Returning access token.
+api.spotify.com/v1/browse/featured-playlists?limit=6&offset=0:1  Failed to load resource: the server responded with a status of 404 ()Understand this error
+spotifyApi.js:64 Error fetching from Spotify API: /browse/featured-playlists?limit=6&offset=0 Error: Spotify API error: 404
+    at Object._fetch (spotifyApi.js:53:23)
+    at async loadDynamicContent (main.js:267:35)
+_fetch @ spotifyApi.js:64Understand this error
+spotifyAuth.js:112 spotifyAuth.js: getAccessToken() called.
+spotifyAuth.js:122 spotifyAuth.js: Access token is valid. Returning access token.
+spotifyAuth.js:112 spotifyAuth.js: getAccessToken() called.
+spotifyAuth.js:122 spotifyAuth.js: Access token is valid. Returning access token.
+spotifyAuth.js:112 spotifyAuth.js: getAccessToken() called.
+spotifyAuth.js:122 spotifyAuth.js: Access token is valid. Returning access token.
+:5500/favicon.ico:1  Failed to load resource: the server responded with a status of 404 (File not found)

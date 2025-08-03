@@ -71,7 +71,7 @@ const spotifyApi = {
     },
 
     getFeaturedPlaylists: async (limit = 6, offset = 0) => {
-        return spotifyApi._fetch(`/browse/featured-playlists?limit=${limit}&offset=${offset}`);
+        return spotifyApi._fetch(`/browse/featured-playlists?limit=${limit}&offset=${offset}&country=US`);
     },
 
     getNewReleases: async (limit = 6, offset = 0) => {
@@ -93,6 +93,10 @@ const spotifyApi = {
             limit: limit
         });
         return spotifyApi._fetch(`/recommendations?${seedParams.toString()}`);
+    },
+
+    getTrack: async (trackId) => {
+        return spotifyApi._fetch(`/tracks/${trackId}`);
     },
 
     getUserPlaylists: async (limit = 6, offset = 0) => {
