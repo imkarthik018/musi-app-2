@@ -398,7 +398,7 @@ nav::before {
 }
 
 @keyframes glitch-text {
-    0%, 100% { transform: translate(0); text-shadow: 0 0 5px rgba(182, 107, 255, 0.5); } 
+    0%, 100% { transform: translate(0); text-shadow: 0 0 5px rgba(182, 107, 255, 0.5); }
     1% { transform: translate(-1px, 1px); }
     2% { transform: translate(1px, -1px); }
     3% { transform: translate(-1px, -1px); }
@@ -705,6 +705,7 @@ nav::before {
         filter: blur(15px);
     }
 }
+
 
 
 
@@ -1722,64 +1723,63 @@ main {
 	}
 }
 
-
-
-/* Cursor Styles */
-#cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: invert(1);
-    -webkit-backdrop-filter: invert(1);
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.1s ease-out, opacity 0.3s ease, width 0.3s ease, height 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Custom Cursor Styles */
+* {
+  cursor: none;
 }
 
-#cursor .dot {
-    width: 4px;
-    height: 4px;
-    background: white;
-    border-radius: 50%;
-    transition: all 0.3s ease;
+/* Default Glassmorphic Cursor State */
+.cursor {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  width: 50px;
+  height: 50px;
+  z-index: 10000;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transition: width 0.2s ease-out, height 0.2s ease-out, background 0.2s ease-out, backdrop-filter 0.2s ease-out, transform 0.2s cubic-bezier(0.23,1,0.32,1);
 }
 
-#cursor.hovered {
-    width: 48px;
-    height: 48px;
-    background: rgba(255, 255, 255, 0.2);
+/* The SVG play icon, hidden by default */
+.cursor svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  fill: #000; /* Black play icon */
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
 }
 
-#cursor.hovered .dot {
-    opacity: 0;
+/* The cursor's appearance during the hover state */
+.cursor.play-icon {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(16px);
 }
 
-#cursor.playing {
-    width: 48px;
-    height: 48px;
-    background: rgba(182, 107, 255, 0.3);
+/* Make the SVG visible when the cursor has the 'play-icon' class */
+.cursor.play-icon svg {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
 }
 
-#cursor.playing .dot {
-    opacity: 0;
+/* Other hover effects */
+.cursor.hover-link {
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.3);
 }
 
-#cursor svg {
-    width: 16px;
-    height: 16px;
-    fill: white;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    position: absolute;
+.cursor.click-effect {
+  animation: clickShrink 160ms forwards;
 }
-
-#cursor.playing svg {
-    opacity: 1;
+@keyframes clickShrink {
+  0% { transform-origin: center center; }
+  50% { transform: scale(0.8); }
+  100% { transform: scale(1); }
 }

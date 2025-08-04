@@ -8,6 +8,11 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <style>
+      body {
+        background: #0f0f0f;
+      }
+    </style>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;600;700&display=swap"
       rel="stylesheet"
@@ -26,7 +31,9 @@
   <body
     class="bg-gray-950 text-gray-100 font-sans min-h-screen overflow-x-hidden"
   >
-    <div id="glassCursor" class="cursor">
+    <!-- Cursor -->
+    <div id="cursor">
+      <div class="dot"></div>
       <svg viewBox="0 0 24 24">
         <polygon points="8,5 19,12 8,19"></polygon>
       </svg>
@@ -162,7 +169,7 @@
     </h2>
     <div class="flex items-center space-x-6">
         <div class="relative group">
-            <img src="savee images/passion.jpg" alt="Album Art" class="w-24 h-24 rounded-2xl object-cover transform group-hover:scale-105 transition-transform duration-300">
+            <img src="savee images/passion.jpg" alt="Album Art" class="cover w-24 h-24 rounded-2xl object-cover transform group-hover:scale-105 transition-transform duration-300">
             <div class="absolute inset-0 rounded-2xl border-2 border-musi-accent/30 group-hover:border-musi-accent/50 transition-all duration-300"></div>
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300 flex items-center justify-center">
                 <button class="w-10 h-10 rounded-full bg-musi-accent text-black flex items-center justify-center transform hover:scale-110 transition-transform">
@@ -286,7 +293,7 @@
                 <!-- Mix 1 -->
                 <div class="group-hover:bg-gradient-to-br group-hover:from-purple-500/10 group-hover:to-pink-500/10 p-3 rounded-xl transition-all duration-300 hover:scale-[1.02]">
                     <div class="relative overflow-hidden rounded-lg mb-3">
-                        <img src="./savee images/download (3).jpg" alt="Indie Mix" class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img src="./savee images/download (3).jpg" alt="Indie Mix" class="cover w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500">
                         <button class="absolute bottom-2 right-2 w-8 h-8 bg-musi-accent text-black rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
                             <i class="fas fa-play text-xs"></i>
                         </button>
@@ -298,7 +305,7 @@
                 <!-- Mix 2 -->
                 <div class="group-hover:bg-gradient-to-br group-hover:from-blue-500/10 group-hover:to-cyan-500/10 p-3 rounded-xl transition-all duration-300 hover:scale-[1.02]">
                     <div class="relative overflow-hidden rounded-lg mb-3">
-                        <img src="./savee images/overthink.jpg" alt="Electronic Mix" class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img src="./savee images/overthink.jpg" alt="Electronic Mix" class="cover w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500">
                         <button class="absolute bottom-2 right-2 w-8 h-8 bg-musi-accent text-black rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
                             <i class="fas fa-play text-xs"></i>
                         </button>
@@ -403,8 +410,7 @@
         <div class="dots">
         </div>
 
-        <!-- Custom Cursor (Framer Motion-inspired) -->
-        <div id="custom-cursor" class="pointer-events-none fixed top-0 left-0 z-50 w-12 h-12 rounded-full border-2 border-neutral-800 opacity-70 transition-transform duration-150 ease-out transform -translate-x-1/2 -translate-y-1/2"></div>
+        
       </div>
 
       <!-- Profile Content (hidden by default) -->
@@ -445,7 +451,7 @@
               <img
                 src="savee images/abstract.jpg"
                 alt="Album"
-                class="w-full h-full object-cover"
+                class="cover w-full h-full object-cover"
               />
             </div>
             <div>

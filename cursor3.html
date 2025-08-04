@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Premium Glass Cursor with Hover Play Effect</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    * {
+      cursor: none;
+    }
+    body {
+      background: #0f0f0f;
+      margin: 0;
+      font-family: sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* --- Core Cursor (Glassmorphic) --- */
+    #cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 50px;
+      height: 50px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+      pointer-events: none;
+      z-index: 10000;
+      transition: all 0.25s ease;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    #cursor .dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+      transition: all 0.25s ease;
+    }
+
+    #cursor svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 27px;
+      height: 27px;
+      fill: rgb(0, 0, 0);
+      transform: translate(-50%, -50%) scale(0.3) rotate(90deg);
+      opacity: 0;
+      transition: all 0.25s ease;
+    }
+
+    #cursor.play-mode {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+
+    #cursor.play-mode .dot {
+      opacity: 0;
+    }
+
+    #cursor.play-mode svg {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1) rotate(90deg);
+    }
+  </style>
+</head>
+<body>
+  <!-- Cursor -->
+  <div id="cursor">
+    <div class="dot"></div>
+    <svg viewBox="0 0 24 24">
+      <polygon points="8,5 19,12 8,19"></polygon>
+    </svg>
+  </div>
+
+  <!-- UI Content -->
+  <section class="min-h-screen flex flex-col justify-center items-center space-y-12 p-8">
+    <h1 class="text-4xl font-bold text-white">🎵 Your Playlist</h1>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="cover bg-white bg-opacity-5 rounded-xl p-4 w-40 h-40 backdrop-blur-md" style="background-image: url('https://picsum.photos/id/101/300'); background-size: cover;"></div>
+      <div class="cover bg-white bg-opacity-5 rounded-xl p-4 w-40 h-40 backdrop-blur-md" style="background-image: url('https://picsum.photos/id/102/300'); background-size: cover;"></div>
+      <div class="cover bg-white bg-opacity-5 rounded-xl p-4 w-40 h-40 backdrop-blur-md" style="background-image: url('https://picsum.photos/id/103/300'); background-size: cover;"></div>
+      <div class="cover bg-white bg-opacity-5 rounded-xl p-4 w-40 h-40 backdrop-blur-md" style="background-image: url('https://picsum.photos/id/104/300'); background-size: cover;"></div>
+    </div>
+  </section>
+
+  <script>
+    const cursor = document.getElementById("cursor");
+    const dot = cursor.querySelector(".dot");
+    const svg = cursor.querySelector("svg");
+    const hoverTargets = document.querySelectorAll(".cover");
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+
+    window.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animateCursor() {
+      cursor.style.left = `${mouseX}px`;
+      cursor.style.top = `${mouseY}px`;
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    hoverTargets.forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        cursor.classList.add("play-mode");
+      });
+      el.addEventListener("mouseleave", () => {
+        cursor.classList.remove("play-mode");
+      });
+    });
+
+    window.addEventListener("mousedown", () => {
+      cursor.style.transform = "translate(-50%, -50%) scale(0.6)";
+    });
+    window.addEventListener("mouseup", () => {
+      cursor.style.transform = "translate(-50%, -50%) scale(1)";
+    });
+  </script>
+</body>
+</html>
