@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor Hover Effect - Play Next</title>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+            cursor: none;
+        }
+
+        .hover-target {
+            padding: 20px 40px;
+            border: 1px solid #f0f0f0;
+            border-radius: 10px;
+            cursor: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .hover-target:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        #cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: invert(1);
+            -webkit-backdrop-filter: invert(1);
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease-out, opacity 0.3s ease, width 0.3s ease, height 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #cursor .dot {
+            width: 4px;
+            height: 4px;
+            background: rgb(0, 0, 0);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        #cursor.hovered {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        #cursor.hovered .dot {
+            opacity: 0;
+        }
+
+        #cursor.playing {
+            width: 48px;
+            height: 48px;
+            background: rgba(182, 107, 255, 0.3);
+        }
+
+        #cursor.playing .dot {
+            opacity: 0;
+        }
+
+        #cursor svg {
+            width: 16px;
+            height: 16px;
+            fill: black;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            position: absolute;
+        }
+
+        #cursor.hovered svg {
+            opacity: 1;
+        }
+
+        #cursor.playing svg {
+            opacity: 1;
+            fill: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor">
+        <div class="dot"></div>
+        <svg viewBox="0 0 24 24">
+            <path d="m6 6 8.5 6L6 18V6zm12 12V6h-2v12h2z"></path>
+        </svg>
+    </div>
+
+    <div class="hover-target">Hover over me</div>
+    <div class="hover-target">Hover over me too</div>
+    <div class="hover-target">And me!</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cursor = document.getElementById('cursor');
+            if (!cursor) return;
+
+            let mouseX = 0;
+            let mouseY = 0;
+            let isHovering = false;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function updateCursor() {
+                if (cursor) {
+                    cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+                }
+                requestAnimationFrame(updateCursor);
+            }
+
+            requestAnimationFrame(updateCursor);
+
+            const hoverTargets = document.querySelectorAll('.hover-target');
+            hoverTargets.forEach(target => {
+                target.addEventListener('mouseenter', () => {
+                    isHovering = true;
+                    cursor.classList.add('hovered');
+                });
+                target.addEventListener('mouseleave', () => {
+                    isHovering = false;
+                    cursor.classList.remove('hovered');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,35 +1,46 @@
-const cursor = document.getElementById("cursor");
-const dot = cursor.querySelector(".dot");
-const svg = cursor.querySelector("svg");
-const hoverTargets = document.querySelectorAll(".cover");
+const cursor = document.getElementById('cursor');
 
-let mouseX = window.innerWidth / 2;
-let mouseY = window.innerHeight / 2;
+if (cursor) {
+    let mouseX = 0;
+    let mouseY = 0;
 
-window.addEventListener("mousemove", (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-});
+    // Function to update cursor position
+    function updateCursorPosition(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    }
 
-function animateCursor() {
-  cursor.style.left = `${mouseX}px`;
-  cursor.style.top = `${mouseY}px`;
-  requestAnimationFrame(animateCursor);
+    // Animation loop for smooth movement
+    function animateCursor() {
+        // The translate needs to be adjusted by half the cursor's size to center it
+        cursor.style.transform = `translate(${mouseX - cursor.offsetWidth / 2}px, ${mouseY - cursor.offsetHeight / 2}px)`;
+        requestAnimationFrame(animateCursor);
+    }
+
+    // Event delegation for hover effect
+    document.addEventListener('mouseover', (e) => {
+        // Check if the element being hovered over is a carousel item
+        if (e.target.closest('.group')) {
+            cursor.classList.add('hovered');
+        }
+    });
+
+    document.addEventListener('mouseout', (e) => {
+        // Check if the element being left is a carousel item
+        if (e.target.closest('.group')) {
+            cursor.classList.remove('hovered');
+        }
+    });
+    
+    // Mouse press/release effect
+    window.addEventListener("mousedown", () => {
+        cursor.style.transform = `translate(${mouseX - cursor.offsetWidth / 2}px, ${mouseY - cursor.offsetHeight / 2}px) scale(0.8)`;
+    });
+    window.addEventListener("mouseup", () => {
+        cursor.style.transform = `translate(${mouseX - cursor.offsetWidth / 2}px, ${mouseY - cursor.offsetHeight / 2}px) scale(1)`;
+    });
+
+    // Start listening for mouse movement and animating the cursor
+    window.addEventListener('mousemove', updateCursorPosition);
+    requestAnimationFrame(animateCursor);
 }
-animateCursor();
-
-hoverTargets.forEach((el) => {
-  el.addEventListener("mouseenter", () => {
-    cursor.classList.add("play-mode");
-  });
-  el.addEventListener("mouseleave", () => {
-    cursor.classList.remove("play-mode");
-  });
-});
-
-window.addEventListener("mousedown", () => {
-  cursor.style.transform = "translate(-50%, -50%) scale(0.6)";
-});
-window.addEventListener("mouseup", () => {
-  cursor.style.transform = "translate(-50%, -50%) scale(1)";
-});

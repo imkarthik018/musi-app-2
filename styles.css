@@ -3,11 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    cursor: none !important;
+}
+
 /* Custom Fonts */
 body {
     font-family: 'Inter', sans-serif;
     color: #f0f0f0;
     background-color: #0a0a0a;
+    cursor: none;
 }
 
 /* Premium Welcome Text with Clima Crisis Font */
@@ -1509,7 +1514,7 @@ main {
 	overflow: hidden;
 	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 	transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-	cursor: pointer;
+	cursor: none;
 }
 
 .card img {
@@ -1725,6 +1730,7 @@ main {
 
 
 /* Cursor Styles */
+/* Cursor Styles */
 #cursor {
     position: fixed;
     top: 0;
@@ -1746,7 +1752,7 @@ main {
 #cursor .dot {
     width: 4px;
     height: 4px;
-    background: white;
+    background: rgb(0, 0, 0);
     border-radius: 50%;
     transition: all 0.3s ease;
 }
@@ -1774,12 +1780,55 @@ main {
 #cursor svg {
     width: 16px;
     height: 16px;
-    fill: white;
+    fill: black;
     opacity: 0;
     transition: opacity 0.3s ease;
     position: absolute;
 }
 
+#cursor.hovered svg {
+    opacity: 1;
+}
+
 #cursor.playing svg {
     opacity: 1;
+    fill: white;
+}
+
+#cursor.hovered {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#cursor.hovered .dot {
+    opacity: 0;
+}
+
+#cursor.playing {
+    width: 48px;
+    height: 48px;
+    background: rgba(77, 51, 51, 0.3);
+}
+
+#cursor.playing .dot {
+    opacity: 0;
+}
+
+#cursor svg {
+    width: 16px;
+    height: 16px;
+    fill: black;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: absolute;
+}
+
+#cursor.hovered svg {
+    opacity: 1;
+}
+
+#cursor.playing svg {
+    opacity: 1;
+    fill: white;
 }

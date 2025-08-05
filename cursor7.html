@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor</title>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+            cursor: none; /* Hide the default system cursor */
+        }
+
+        #cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: invert(1);
+            -webkit-backdrop-filter: invert(1);
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease-out, opacity 0.3s ease, width 0.3s ease, height 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #cursor .dot {
+            width: 4px;
+            height: 4px;
+            background: rgb(0, 0, 0);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor">
+        <div class="dot"></div>
+    </div>
+
+    <script>
+        const cursor = document.getElementById("cursor");
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+
+        window.addEventListener("mousemove", (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+          if (cursor) {
+            cursor.style.left = `${mouseX}px`;
+            cursor.style.top = `${mouseY}px`;
+          }
+          requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        window.addEventListener("mousedown", () => {
+            if(cursor) {
+                cursor.style.transform = "translate(-50%, -50%) scale(0.6)";
+            }
+        });
+        window.addEventListener("mouseup", () => {
+            if(cursor) {
+                cursor.style.transform = "translate(-50%, -50%) scale(1)";
+            }
+        });
+    </script>
+
+</body>
+</html>
